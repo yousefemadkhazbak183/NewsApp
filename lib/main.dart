@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news_app/core/theme/light_theme.dart';
+import 'package:flutter_news_app/features/onboarding/onboarding_screen.dart';
 import 'package:flutter_news_app/features/splash/splash_screen.dart';
 
 void main() {
@@ -13,10 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const SplashScreen(),
+      theme: lightTheme,
+      home: OnboardingScreen(),
     );
   }
 }
