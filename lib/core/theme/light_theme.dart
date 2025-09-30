@@ -17,7 +17,16 @@ ThemeData lightTheme = ThemeData(
       backgroundColor: const Color(0xFFC53030),
       foregroundColor: const Color(0xFFFFFCFC),
       textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+      shape: const RoundedRectangleBorder(),
     ),
+  ),
+
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    selectedItemColor: Color(0xFFC53030),
+    unselectedItemColor: Color(0xFF363636),
+    backgroundColor: Color(0xfFF6F7F9),
+    type: BottomNavigationBarType.fixed,
+    showSelectedLabels: true,
+    selectedIconTheme: IconThemeData(color: Color(0xFFC53030)),
   ),
 );
