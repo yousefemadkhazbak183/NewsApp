@@ -10,8 +10,12 @@ class ApiService {
       ...?query,
     });
 
-    final http.Response response = await http.get(url);
+    try {
+      final http.Response response = await http.get(url);
 
-    return jsonDecode(response.body) as Map<String, dynamic>;
+      return jsonDecode(response.body) as Map<String, dynamic>;
+    } catch (e) {
+      throw Exception("Failed error message");
+    }
   }
 }
