@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news_app/core/data/local_data/shared_preferences.dart';
+import 'package:flutter_news_app/features/login/login_screen.dart';
 import 'package:flutter_news_app/features/onboarding/controller/onboarding_controller.dart';
 import 'package:flutter_news_app/features/onboarding/model/onboarding_model.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +8,18 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
+
+  Future<void> _onFinish(BuildContext context) async {
+    await PreferencesManager().setBool('onBoarding_complete', true);
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) {
+          return const LoginScreen();
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +31,6 @@ class OnboardingScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: const Color(0xFFf5f5f5),
-
             actions: [
               Consumer<OnboardingController>(
                 builder:
@@ -29,7 +42,9 @@ class OnboardingScreen extends StatelessWidget {
                       return value.isLastPage
                           ? const SizedBox()
                           : TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                _onFinish(context);
+                              },
                               child: const Text(
                                 'Skip',
                                 style: TextStyle(fontSize: 16),
@@ -109,7 +124,14 @@ class OnboardingScreen extends StatelessWidget {
                       ) {
                         return ElevatedButton(
                           onPressed: () {
-                            controller.onNextPressed();
+                            if (!value.isLastPage) {
+                              controller.pageController.nextPage(
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeInOut,
+                              );
+                            } else {
+                              _onFinish(context);
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             fixedSize: Size(
