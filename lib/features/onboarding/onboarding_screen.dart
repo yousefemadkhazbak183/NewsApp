@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/core/data/local_data/shared_preferences.dart';
-import 'package:flutter_news_app/features/login/login_screen.dart';
+import 'package:flutter_news_app/features/auth/login_screen.dart';
 import 'package:flutter_news_app/features/onboarding/controller/onboarding_controller.dart';
 import 'package:flutter_news_app/features/onboarding/model/onboarding_model.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +15,7 @@ class OnboardingScreen extends StatelessWidget {
       context,
       MaterialPageRoute(
         builder: (BuildContext context) {
-          return const LoginScreen();
+          return LoginScreen();
         },
       ),
     );
