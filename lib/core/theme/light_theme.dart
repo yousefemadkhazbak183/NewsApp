@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news_app/core/colors/app_color.dart';
 
 ThemeData lightTheme = ThemeData(
   useMaterial3: true,
   brightness: Brightness.light,
   colorScheme: const ColorScheme.light(),
-
+  primaryColor: AppColor.primaryColor,
   scaffoldBackgroundColor: const Color(0xFFF5F5F5),
 
   textButtonTheme: TextButtonThemeData(
@@ -28,5 +29,38 @@ ThemeData lightTheme = ThemeData(
     type: BottomNavigationBarType.fixed,
     showSelectedLabels: true,
     selectedIconTheme: IconThemeData(color: Color(0xFFC53030)),
+  ),
+
+  inputDecorationTheme: const InputDecorationTheme(
+    hintStyle: TextStyle(
+      color: AppColor.secondColor,
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+    ),
+    filled: true,
+    fillColor: Color(0xFFFFFFFF),
+    focusColor: Color(0xFFD1DAD6),
+
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.zero,
+      borderSide: BorderSide(color: Color(0xFFD1DAD6)),
+    ),
+    errorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.zero,
+
+      borderSide: BorderSide(color: Colors.red),
+    ),
+
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.zero,
+
+      borderSide: BorderSide(color: Color(0xFFD1DAD6)),
+    ),
+
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.zero,
+
+      borderSide: BorderSide(color: Color(0xFFD1DAD6)),
+    ),
   ),
 );
