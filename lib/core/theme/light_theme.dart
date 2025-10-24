@@ -12,7 +12,7 @@ ThemeData lightTheme = ThemeData(
     style: TextButton.styleFrom(foregroundColor: const Color(0xFFC53030)),
   ),
   appBarTheme: const AppBarTheme(backgroundColor: Color(0xFFFFFFFF)),
-
+  progressIndicatorTheme: const ProgressIndicatorThemeData(color: Colors.black),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: const Color(0xFFC53030),
