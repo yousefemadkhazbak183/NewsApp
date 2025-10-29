@@ -17,15 +17,9 @@ class HomeController extends ChangeNotifier {
   }
   Future<void> getTopHeadLines() async {
     try {
-      final Map<String, dynamic> result = await apiService.get(
-        ApiConfig.topHeadlines,
+      final Map<String, dynamic> result = await apiService.get(ApiConfig.topHeadlines, query: {"country": "us"});
 
-        query: {"country": "us"},
-      );
-
-      newsTopHeadLineList = (result["articles"] as List)
-          .map((e) => ArticleNewsModel.fromJson(e))
-          .toList();
+      newsTopHeadLineList = (result["articles"] as List).map((e) => ArticleNewsModel.fromJson(e)).toList();
       isTopHeadLineLoading = false;
       errorMessage = null;
     } catch (e) {
@@ -39,12 +33,10 @@ class HomeController extends ChangeNotifier {
     try {
       final Map<String, dynamic> result = await apiService.get(
         ApiConfig.everything,
-        query: {"q": "AL-Ahly", 'language': 'us'},
+        query: {"q": "egypt", 'language': 'en'},
       );
 
-      newsEverythingList = (result["articles"] as List)
-          .map((e) => ArticleNewsModel.fromJson(e))
-          .toList();
+      newsEverythingList = (result["articles"] as List).map((e) => ArticleNewsModel.fromJson(e)).toList();
       isEverythingLoading = false;
       errorMessage = null;
     } catch (e) {

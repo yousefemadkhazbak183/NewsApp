@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news_app/features/home/components/trending_news.dart';
 
 import 'package:flutter_news_app/features/home/controller/home_controller.dart';
 
@@ -13,28 +14,7 @@ class HomeScreen extends StatelessWidget {
       create: (BuildContext context) => HomeController(),
       child: Consumer<HomeController>(
         builder: (BuildContext context, controller, Widget? child) {
-          return Scaffold(
-            body: (controller.errorMessage?.isNotEmpty ?? false)
-                ? Center(child: Text(controller.errorMessage!))
-                : controller.isEverythingLoading
-                ? const Center(child: CircularProgressIndicator())
-                : Column(
-                    children: [
-                      if (controller.isEverythingLoading)
-                        const Center(child: CircularProgressIndicator()),
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: controller.newsTopHeadLineList.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Text(
-                              controller.newsTopHeadLineList[index].title ?? "",
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-          );
+          return const Scaffold(body: Column(children: [TrendingNews()]));
         },
       ),
     );

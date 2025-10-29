@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_news_app/core/colors/app_color.dart';
 import 'package:flutter_news_app/core/data/local_data/shared_preferences.dart';
 import 'package:flutter_news_app/core/widgets/custom_text_form_field.dart';
-import 'package:flutter_news_app/features/navigation/navigation_screen.dart';
+import 'package:flutter_news_app/features/home/home_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -51,7 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         context,
         MaterialPageRoute(
           builder: (BuildContext context) {
-            return const NavigationScreen();
+            return const HomeScreen();
           },
         ),
       );
