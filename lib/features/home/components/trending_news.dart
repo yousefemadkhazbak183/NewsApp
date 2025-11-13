@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/core/colors/app_color.dart';
 import 'package:flutter_news_app/core/enum/request_status_enum.dart';
+import 'package:flutter_news_app/features/home/components/view_all_component.dart';
 import 'package:flutter_news_app/features/home/controller/home_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -27,28 +28,7 @@ class TrendingNews extends StatelessWidget {
                   style: TextStyle(color: AppColor.primaryColor, fontSize: 40, fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: 6),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Trending News",
-                        style: TextStyle(color: AppColor.whiteColor, fontSize: 16, fontWeight: FontWeight.w700),
-                      ),
-                      Text(
-                        "View all",
-                        style: TextStyle(
-                          color: AppColor.whiteColor,
-                          decoration: TextDecoration.underline,
-                          decorationColor: AppColor.whiteColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                ViewAllComponent(title: "Trending News", onTap: () {}),
                 const SizedBox(height: 12),
                 SizedBox(
                   height: 140,
@@ -63,35 +43,89 @@ class TrendingNews extends StatelessWidget {
                           return ListView.separated(
                             padding: const EdgeInsets.only(left: 16),
                             separatorBuilder: (BuildContext context, int index) => const SizedBox(width: 12),
-                            itemCount: controller.newsEverythingList.length,
+                            itemCount: controller.newsEverythingList.take(3).length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (BuildContext context, int index) {
-                              return ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
-                                child: Stack(
-                                  children: [
-                                    if (controller.newsEverythingList[index].urlToImage != null)
-                                      Image.network(
-                                        controller.newsEverythingList[index].urlToImage!,
-                                        width: 240,
-                                        height: 140,
-                                      ),
+                              final model = controller.newsEverythingList[index];
+                              return SizedBox(
+                                width: 240,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: Stack(
+                                    children: [
+                                      if (model.urlToImage != null)
+                                        Image.network(model.urlToImage!, width: 240, height: 140),
 
-                                    Positioned.fill(
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          gradient: LinearGradient(
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomCenter,
-                                            colors: [
-                                              Colors.black.withValues(alpha: 0.5),
-                                              Colors.black.withValues(alpha: 0.7),
-                                            ],
+                                      Positioned.fill(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            gradient: LinearGradient(
+                                              begin: Alignment.topCenter,
+                                              end: Alignment.bottomCenter,
+                                              colors: [
+                                                Colors.black.withValues(alpha: 0.5),
+                                                Colors.black.withValues(alpha: 0.7),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                      Positioned(
+                                        left: 12,
+                                        bottom: 12,
+                                        right: 12,
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              model.title!,
+                                              style: const TextStyle(
+                                                color: Color(0xFFFFFCFC),
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 16,
+                                              ),
+                                              maxLines: 2,
+                                            ),
+                                            const SizedBox(height: 6),
+                                            Row(
+                                              children: [
+                                                Expanded(
+                                                  child: Row(
+                                                    children: [
+                                                      CircleAvatar(
+                                                        backgroundImage: NetworkImage(model.urlToImage.toString()),
+                                                        radius: 10,
+                                                      ),
+                                                      const SizedBox(width: 6),
+                                                      Expanded(
+                                                        child: Text(
+                                                          model.author ?? "لا يوجد ",
+                                                          style: const TextStyle(
+                                                            color: Color(0xFFFFFCFC),
+                                                            fontWeight: FontWeight.w400,
+                                                            fontSize: 12,
+                                                          ),
+                                                        ),
+                                                      ),
+
+                                                      Text(
+                                                        formatDataTime(model.publishedAt),
+                                                        style: const TextStyle(
+                                                          fontSize: 12,
+                                                          fontWeight: FontWeight.w400,
+                                                          color: Color(0xFFFFFCFC),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               );
                             },
@@ -106,5 +140,21 @@ class TrendingNews extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  /// TODO :  Refactor
+  String formatDataTime(String? date) {
+    if (date == null) {
+      return "";
+    }
+    final differenceTime = DateTime.now().difference(DateTime.parse(date));
+
+    if (differenceTime.inMinutes < 60) {
+      return "${differenceTime.inMinutes} m ago.";
+    }
+    if (differenceTime.inHours < 24) {
+      return "${differenceTime.inHours} h ago.";
+    }
+    return "${differenceTime.inDays} d ago.";
   }
 }
