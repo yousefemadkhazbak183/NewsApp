@@ -1,15 +1,68 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news_app/core/colors/app_color.dart';
+import 'package:flutter_news_app/core/data/local_data/shared_preferences.dart';
 import 'package:flutter_news_app/core/widgets/custom_text_form_field.dart';
 import 'package:flutter_news_app/features/auth/register_screen.dart';
+import 'package:flutter_news_app/features/home/home_screen.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
 
   TextEditingController passwordEmail = TextEditingController();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  String? errorMessage;
+  bool isLoading = false;
 
-  LoginScreen({super.key});
+  Future<void> login() async {
+    setState(() {
+      errorMessage = null;
+      isLoading = true;
+    });
+    await Future.delayed(const Duration(seconds: 2));
+
+    final getEmail = PreferencesManager().getString("user_email");
+    final getPassword = PreferencesManager().getString("user_password");
+
+    if (getEmail == null || getPassword == null) {
+      setState(() {
+        errorMessage = "Not Found Account";
+        isLoading = false;
+      });
+      return;
+    }
+
+    if (getEmail != emailController.text.trim() &&
+        getPassword != passwordEmail.text.trim()) {
+      setState(() {
+        errorMessage = "Not Found Account";
+        isLoading = false;
+      });
+      return;
+    }
+
+    await PreferencesManager().setBool("is_logged", true);
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) {
+          return const HomeScreen();
+        },
+      ),
+    );
+    setState(() {
+      errorMessage = null;
+      isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,19 +120,18 @@ class LoginScreen extends StatelessWidget {
                   title: 'Password',
                   obscureText: true,
                   validator: (value) {
-                    final passwordRegExp = RegExp(
-                      r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#\$&*~]).{8,}$',
-                    );
                     if (value == null || value.isEmpty) {
                       return 'Please enter your password';
-                    }
-                    if (!passwordRegExp.hasMatch(value)) {
-                      return 'Please enter a valid email address';
                     } else {
                       return null;
                     }
                   },
                 ),
+                if (errorMessage != null)
+                  Text(
+                    errorMessage!,
+                    style: const TextStyle(color: AppColor.primaryColor),
+                  ),
                 const SizedBox(height: 24),
 
                 SizedBox(
@@ -87,9 +139,13 @@ class LoginScreen extends StatelessWidget {
                   height: 48,
                   child: ElevatedButton(
                     onPressed: () {
-                      if (formKey.currentState?.validate() ?? false) {}
+                      if (formKey.currentState?.validate() ?? false) {
+                        login();
+                      }
                     },
-                    child: const Text('Sign In'),
+                    child: isLoading
+                        ? const CircularProgressIndicator()
+                        : const Text('Sign In'),
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -107,7 +163,7 @@ class LoginScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (BuildContext context) {
-                              return RegisterScreen();
+                              return const RegisterScreen();
                             },
                           ),
                         );
