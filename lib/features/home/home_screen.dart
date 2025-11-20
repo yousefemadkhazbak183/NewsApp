@@ -22,6 +22,15 @@ class HomeScreen extends StatelessWidget {
                 const TrendingNews(),
                 ViewAllComponent(title: "Categories", titleColor: const Color(0xFF141414), onTap: () {}),
                 CategoriesList(),
+
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: controller.newsTopHeadLineList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(color: Colors.red, height: 20, width: 50);
+                    },
+                  ),
+                ),
               ],
             ),
           );
