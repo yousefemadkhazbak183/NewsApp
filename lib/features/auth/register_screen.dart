@@ -39,10 +39,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       });
     } else {
       await PreferencesManager().setString("user_email", emailController.text);
-      await PreferencesManager().setString(
-        "user_password",
-        passwordController.text,
-      );
+      await PreferencesManager().setString("user_password", passwordController.text);
       await PreferencesManager().setBool("is_logged", true);
       setState(() {
         isLoading = false;
@@ -51,7 +48,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         context,
         MaterialPageRoute(
           builder: (BuildContext context) {
-            return const HomeScreen();
+            return HomeScreen();
           },
         ),
       );
@@ -65,10 +62,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/back_ground.png'),
-            fit: BoxFit.fill,
-          ),
+          image: DecorationImage(image: AssetImage('assets/images/back_ground.png'), fit: BoxFit.fill),
         ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -78,14 +72,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(
-                  child: Image.asset("assets/images/logo.png", height: 45),
-                ),
+                Center(child: Image.asset("assets/images/logo.png", height: 45)),
                 const SizedBox(height: 40),
-                const Text(
-                  'Welcome to Newts',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-                ),
+                const Text('Welcome to Newts', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
                 const SizedBox(height: 24),
 
                 CustomTextFormField(
@@ -93,9 +82,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   controller: emailController,
                   title: 'Email',
                   validator: (value) {
-                    final emailRegExp = RegExp(
-                      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
-                    );
+                    final emailRegExp = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
                     if (value == null || value.isEmpty) {
                       return 'Please enter your email';
                     }
@@ -138,10 +125,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 if (errorMessage != null)
                   Padding(
                     padding: const EdgeInsetsGeometry.symmetric(vertical: 8),
-                    child: Text(
-                      errorMessage!,
-                      style: const TextStyle(color: AppColor.primaryColor),
-                    ),
+                    child: Text(errorMessage!, style: const TextStyle(color: AppColor.primaryColor)),
                   ),
 
                 const SizedBox(height: 24),
@@ -154,31 +138,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         register();
                       }
                     },
-                    child: isLoading
-                        ? const CircularProgressIndicator()
-                        : const Text('Sign Up'),
+                    child: isLoading ? const CircularProgressIndicator() : const Text('Sign Up'),
                   ),
                 ),
                 const SizedBox(height: 24),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      "Have an account?",
-                      style: TextStyle(fontSize: 14),
-                    ),
+                    const Text("Have an account?", style: TextStyle(fontSize: 14)),
                     const SizedBox(width: 8),
                     GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Text(
-                        'Sign In',
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 14,
-                        ),
-                      ),
+                      child: Text('Sign In', style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 14)),
                     ),
                   ],
                 ),

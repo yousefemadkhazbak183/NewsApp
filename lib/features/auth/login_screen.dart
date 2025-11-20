@@ -39,8 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
-    if (getEmail != emailController.text.trim() &&
-        getPassword != passwordEmail.text.trim()) {
+    if (getEmail != emailController.text.trim() && getPassword != passwordEmail.text.trim()) {
       setState(() {
         errorMessage = "Not Found Account";
         isLoading = false;
@@ -54,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
       context,
       MaterialPageRoute(
         builder: (BuildContext context) {
-          return const HomeScreen();
+          return HomeScreen();
         },
       ),
     );
@@ -71,10 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/back_ground.png'),
-            fit: BoxFit.fill,
-          ),
+          image: DecorationImage(image: AssetImage('assets/images/back_ground.png'), fit: BoxFit.fill),
         ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -84,14 +80,9 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(
-                  child: Image.asset("assets/images/logo.png", height: 45),
-                ),
+                Center(child: Image.asset("assets/images/logo.png", height: 45)),
                 const SizedBox(height: 40),
-                const Text(
-                  'Welcome to Newts',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-                ),
+                const Text('Welcome to Newts', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
                 const SizedBox(height: 24),
 
                 CustomTextFormField(
@@ -99,9 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: emailController,
                   title: 'Email',
                   validator: (value) {
-                    final emailRegExp = RegExp(
-                      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
-                    );
+                    final emailRegExp = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
                     if (value == null || value.isEmpty) {
                       return 'Please enter your email';
                     }
@@ -127,11 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     }
                   },
                 ),
-                if (errorMessage != null)
-                  Text(
-                    errorMessage!,
-                    style: const TextStyle(color: AppColor.primaryColor),
-                  ),
+                if (errorMessage != null) Text(errorMessage!, style: const TextStyle(color: AppColor.primaryColor)),
                 const SizedBox(height: 24),
 
                 SizedBox(
@@ -143,19 +128,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         login();
                       }
                     },
-                    child: isLoading
-                        ? const CircularProgressIndicator()
-                        : const Text('Sign In'),
+                    child: isLoading ? const CircularProgressIndicator() : const Text('Sign In'),
                   ),
                 ),
                 const SizedBox(height: 24),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      "Don't have account?",
-                      style: TextStyle(fontSize: 14),
-                    ),
+                    const Text("Don't have account?", style: TextStyle(fontSize: 14)),
                     const SizedBox(width: 8),
                     GestureDetector(
                       onTap: () {
@@ -168,13 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         );
                       },
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 14,
-                        ),
-                      ),
+                      child: Text('Sign Up', style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 14)),
                     ),
                   ],
                 ),

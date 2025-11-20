@@ -13,12 +13,7 @@ class NavigationScreen extends StatefulWidget {
 }
 
 class _NavigationScreenState extends State<NavigationScreen> {
-  final List<Widget> _screens = [
-    const HomeScreen(),
-    const SearchScreen(),
-    const BookmarkScreen(),
-    const ProfileScreen(),
-  ];
+  final List<Widget> _screens = [HomeScreen(), const SearchScreen(), const BookmarkScreen(), const ProfileScreen()];
 
   int _currentScreen = 0;
 
@@ -36,9 +31,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
             icon: SvgPicture.asset(
               'assets/images/main.svg',
               colorFilter: ColorFilter.mode(
-                _currentScreen == 0
-                    ? const Color(0xFFC53030)
-                    : const Color(0xFF363636),
+                _currentScreen == 0 ? const Color(0xFFC53030) : const Color(0xFF363636),
                 BlendMode.srcIn,
               ),
             ),
@@ -48,9 +41,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
             icon: SvgPicture.asset(
               'assets/images/search.svg',
               colorFilter: ColorFilter.mode(
-                _currentScreen == 1
-                    ? const Color(0xFFC53030)
-                    : const Color(0xFF363636),
+                _currentScreen == 1 ? const Color(0xFFC53030) : const Color(0xFF363636),
                 BlendMode.srcIn,
               ),
             ),
@@ -60,9 +51,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
             icon: SvgPicture.asset(
               'assets/images/bookmark.svg',
               colorFilter: ColorFilter.mode(
-                _currentScreen == 2
-                    ? const Color(0xFFC53030)
-                    : const Color(0xFF363636),
+                _currentScreen == 2 ? const Color(0xFFC53030) : const Color(0xFF363636),
                 BlendMode.srcIn,
               ),
             ),
@@ -73,9 +62,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
               'assets/images/person.svg',
 
               colorFilter: ColorFilter.mode(
-                _currentScreen == 3
-                    ? const Color(0xFFC53030)
-                    : const Color(0xFF363636),
+                _currentScreen == 3 ? const Color(0xFFC53030) : const Color(0xFF363636),
                 BlendMode.srcIn,
               ),
             ),
