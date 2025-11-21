@@ -4,7 +4,7 @@ class ArticleNewsModel {
   final String? description;
   final String? url;
   final String? urlToImage;
-  final String? publishedAt;
+  final DateTime publishedAt;
   final String? content;
 
   ArticleNewsModel({
@@ -36,7 +36,7 @@ class ArticleNewsModel {
       description: map['description'],
       url: map['url'],
       urlToImage: map['urlToImage'],
-      publishedAt: map['publishedAt'],
+      publishedAt: DateTime.tryParse(map['publishedAt']) ?? DateTime.now(),
       content: map['content'],
     );
   }

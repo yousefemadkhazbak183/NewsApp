@@ -5,10 +5,7 @@ import 'package:http/http.dart' as http;
 
 class ApiService {
   Future<dynamic> get(String endPoint, {Map<String, dynamic>? query}) async {
-    final url = Uri.http(ApiConfig.baseUrl, 'v2/$endPoint', {
-      "apiKey": ApiConfig.apiKey,
-      ...?query,
-    });
+    final url = Uri.http(ApiConfig.baseUrl, 'v2/$endPoint', {"apiKey": ApiConfig.apiKey, ...?query});
 
     try {
       final http.Response response = await http.get(url);
