@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_news_app/core/extension/date_time.dart';
 import 'package:flutter_news_app/features/home/components/categorises_list.dart';
 import 'package:flutter_news_app/features/home/components/view_all_component.dart';
 import 'package:flutter_news_app/features/home/components/trending_news.dart';
@@ -68,7 +69,7 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                     const SizedBox(width: 8),
                                     Text(
-                                      (model.publishedAt ?? ""),
+                                      (model.publishedAt.formatDateTime()),
                                       style: const TextStyle(
                                         color: Color(0xFF141414),
                                         fontWeight: FontWeight.w400,
