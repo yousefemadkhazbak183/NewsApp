@@ -20,6 +20,8 @@ class HomeController extends ChangeNotifier {
   }
   Future<void> getTopHeadLines({String? category}) async {
     try {
+      topHeadLineStatus = RequestStatusEnum.loading;
+      notifyListeners();
       final Map<String, dynamic> result = await apiService.get(
         ApiConfig.topHeadlines,
         query: {"country": "us", "category": selectedCategory},
