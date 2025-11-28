@@ -3,6 +3,7 @@ import 'package:flutter_news_app/core/colors/app_color.dart';
 import 'package:flutter_news_app/core/enum/request_status_enum.dart';
 import 'package:flutter_news_app/core/extension/date_time.dart';
 import 'package:flutter_news_app/core/widgets/custom_cached_network_image.dart';
+import 'package:flutter_news_app/features/home/components/trending_news_shimmer.dart';
 import 'package:flutter_news_app/features/home/components/view_all_component.dart';
 import 'package:flutter_news_app/features/home/controller/home_controller.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +40,7 @@ class TrendingNews extends StatelessWidget {
                       builder: (BuildContext context, HomeController controller, Widget? child) {
                         switch (controller.everythingStatus) {
                           case RequestStatusEnum.loading:
-                            return const Center(child: CircularProgressIndicator());
+                            return const TrendingNewsShimmer();
                           case RequestStatusEnum.error:
                             return Center(child: Text(controller.errorMessage!));
                           case RequestStatusEnum.loaded:
