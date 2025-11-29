@@ -19,7 +19,13 @@ class CategoriesList extends StatelessWidget {
                 title: "Categories",
                 titleColor: const Color(0xFF141414),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeCategoryScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          ChangeNotifierProvider.value(value: controller, child: HomeCategoryScreen()),
+                    ),
+                  );
                 },
               ),
               Padding(

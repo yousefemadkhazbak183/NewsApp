@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_news_app/core/data/local_data/shared_preferences.dart';
 import 'package:flutter_news_app/core/theme/light_theme.dart';
 import 'package:flutter_news_app/features/auth/login_screen.dart';
-import 'package:flutter_news_app/features/home/controller/home_controller.dart';
-import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PreferencesManager().init();
 
-  runApp(ChangeNotifierProvider(create: (BuildContext context) => HomeController(), child: const MyApp()));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
