@@ -3,8 +3,6 @@ import 'package:flutter_news_app/core/data/local_data/shared_preferences.dart';
 import 'package:flutter_news_app/core/theme/light_theme.dart';
 import 'package:flutter_news_app/features/auth/login_screen.dart';
 
-import 'package:flutter_news_app/features/splash/splash_screen.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PreferencesManager().init();
@@ -21,7 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: lightTheme,
-      home: LoginScreen(),
+      home: const LoginScreen(),
     );
   }
 }

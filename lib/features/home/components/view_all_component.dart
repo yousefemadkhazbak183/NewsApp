@@ -20,6 +20,7 @@ class ViewAllComponent extends StatelessWidget {
             style: TextStyle(color: titleColor ?? AppColor.whiteColor, fontSize: 16, fontWeight: FontWeight.w700),
           ),
           InkWell(
+            // ignore: avoid_dynamic_calls
             onTap: () => onTap(),
             child: Text(
               'View All',
