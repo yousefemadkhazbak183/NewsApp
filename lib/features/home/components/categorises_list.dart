@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_news_app/core/theme/light_theme.dart';
 import 'package:flutter_news_app/features/home/components/view_all_component.dart';
 import 'package:flutter_news_app/features/home/controller/home_controller.dart';
+import 'package:flutter_news_app/features/home/home_category_screen.dart';
 import 'package:provider/provider.dart';
 
 class CategoriesList extends StatelessWidget {
@@ -14,7 +15,13 @@ class CategoriesList extends StatelessWidget {
         builder: (BuildContext context, controller, Widget? child) {
           return Column(
             children: [
-              ViewAllComponent(title: "Categories", titleColor: const Color(0xFF141414), onTap: () {}),
+              ViewAllComponent(
+                title: "Categories",
+                titleColor: const Color(0xFF141414),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeCategoryScreen()));
+                },
+              ),
               Padding(
                 padding: const EdgeInsets.only(left: 16, top: 16, bottom: 16),
                 child: SizedBox(
@@ -22,7 +29,7 @@ class CategoriesList extends StatelessWidget {
                   child: ListView.separated(
                     itemBuilder: (BuildContext context, int index) {
                       final bool isSelected = controller.selectedCategory == categories[index];
-              
+
                       return GestureDetector(
                         onTap: () {
                           controller.updateSelectedCategory(categories[index]);

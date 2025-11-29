@@ -13,15 +13,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<HomeController>(
-      create: (BuildContext context) => HomeController(),
-      child: Consumer<HomeController>(
-        builder: (BuildContext context, controller, Widget? child) {
-          return Scaffold(
-            body: CustomScrollView(slivers: [const TrendingNews(), CategoriesList(), const TopHeadline()]),
-          );
-        },
-      ),
+    return Consumer<HomeController>(
+      builder: (BuildContext context, controller, Widget? child) {
+        return Scaffold(body: CustomScrollView(slivers: [const TrendingNews(), CategoriesList(), const TopHeadline()]));
+      },
     );
   }
 }

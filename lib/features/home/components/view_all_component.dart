@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/core/colors/app_color.dart';
+import 'package:flutter_news_app/features/home/home_category_screen.dart';
 
 class ViewAllComponent extends StatelessWidget {
   const ViewAllComponent({super.key, required this.title, this.titleColor, required this.onTap});
@@ -20,6 +21,7 @@ class ViewAllComponent extends StatelessWidget {
             style: TextStyle(color: titleColor ?? AppColor.whiteColor, fontSize: 16, fontWeight: FontWeight.w700),
           ),
           InkWell(
+            // ignore: avoid_dynamic_calls
             onTap: () => onTap(),
             child: Text(
               'View All',
