@@ -13,7 +13,12 @@ class NavigationScreen extends StatefulWidget {
 }
 
 class _NavigationScreenState extends State<NavigationScreen> {
-  final List<Widget> _screens = [HomeScreen(), const SearchScreen(), const BookmarkScreen(), const ProfileScreen()];
+  final List<Widget> _screens = [
+    const HomeScreen(),
+    const SearchScreen(),
+    const BookmarkScreen(),
+    const ProfileScreen(),
+  ];
 
   int _currentScreen = 0;
 

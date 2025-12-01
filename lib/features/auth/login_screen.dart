@@ -4,6 +4,7 @@ import 'package:flutter_news_app/core/data/local_data/shared_preferences.dart';
 import 'package:flutter_news_app/core/widgets/custom_text_form_field.dart';
 import 'package:flutter_news_app/features/auth/register_screen.dart';
 import 'package:flutter_news_app/features/home/home_screen.dart';
+import 'package:flutter_news_app/features/navigation/navigation_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -53,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
       context,
       MaterialPageRoute(
         builder: (BuildContext context) {
-          return HomeScreen();
+          return const NavigationScreen();
         },
       ),
     );
