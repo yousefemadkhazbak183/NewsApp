@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/core/data/local_data/shared_preferences.dart';
-import 'package:flutter_news_app/features/home/home_screen.dart';
 import 'package:flutter_news_app/features/auth/login_screen.dart';
+import 'package:flutter_news_app/features/navigation/navigation_screen.dart';
 import 'package:flutter_news_app/features/onboarding/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(seconds: 2));
 
     final bool onBoardingComplete = PreferencesManager().getBool('onBoarding_complete') ?? false;
-    final bool isLoggedIn = PreferencesManager().getBool('is_logged_in') ?? false;
+    final bool isLoggedIn = PreferencesManager().getBool('is_logged') ?? false;
     if (!mounted) return;
     if (!onBoardingComplete) {
       Navigator.pushReplacement(
@@ -33,12 +33,12 @@ class _SplashScreenState extends State<SplashScreen> {
           },
         ),
       );
-    } else if (isLoggedIn) {
+    } else if (!isLoggedIn) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (BuildContext context) {
-            return LoginScreen();
+            return const LoginScreen();
           },
         ),
       );
@@ -47,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
         context,
         MaterialPageRoute(
           builder: (BuildContext context) {
-            return HomeScreen();
+            return const NavigationScreen();
           },
         ),
       );

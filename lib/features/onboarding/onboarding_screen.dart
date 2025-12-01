@@ -15,7 +15,7 @@ class OnboardingScreen extends StatelessWidget {
       context,
       MaterialPageRoute(
         builder: (BuildContext context) {
-          return LoginScreen();
+          return const LoginScreen();
         },
       ),
     );
@@ -33,24 +33,16 @@ class OnboardingScreen extends StatelessWidget {
             backgroundColor: const Color(0xFFf5f5f5),
             actions: [
               Consumer<OnboardingController>(
-                builder:
-                    (
-                      BuildContext context,
-                      OnboardingController value,
-                      Widget? child,
-                    ) {
-                      return value.isLastPage
-                          ? const SizedBox()
-                          : TextButton(
-                              onPressed: () {
-                                _onFinish(context);
-                              },
-                              child: const Text(
-                                'Skip',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            );
-                    },
+                builder: (BuildContext context, OnboardingController value, Widget? child) {
+                  return value.isLastPage
+                      ? const SizedBox()
+                      : TextButton(
+                          onPressed: () {
+                            _onFinish(context);
+                          },
+                          child: const Text('Skip', style: TextStyle(fontSize: 16)),
+                        );
+                },
               ),
             ],
           ),
@@ -66,29 +58,20 @@ class OnboardingScreen extends StatelessWidget {
                     },
                     controller: controller.pageController,
                     itemBuilder: (BuildContext context, int index) {
-                      final OnboardingModel model =
-                          OnboardingModel.onboardingList[index];
+                      final OnboardingModel model = OnboardingModel.onboardingList[index];
                       return Column(
                         children: [
                           Image.asset(model.image),
                           const SizedBox(height: 24),
                           Text(
                             model.title,
-                            style: const TextStyle(
-                              fontSize: 20,
-                              color: Color(0xff4E4B66),
-                              fontWeight: FontWeight.w700,
-                            ),
+                            style: const TextStyle(fontSize: 20, color: Color(0xff4E4B66), fontWeight: FontWeight.w700),
                           ),
                           const SizedBox(height: 12),
                           Text(
                             model.description,
                             textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              color: Color(0xff6E7191),
-                              fontWeight: FontWeight.w400,
-                            ),
+                            style: const TextStyle(fontSize: 16, color: Color(0xff6E7191), fontWeight: FontWeight.w400),
                           ),
                           const Spacer(),
                         ],
@@ -97,53 +80,34 @@ class OnboardingScreen extends StatelessWidget {
                   ),
                 ),
                 Consumer<OnboardingController>(
-                  builder:
-                      (
-                        BuildContext context,
-                        OnboardingController value,
-                        Widget? child,
-                      ) {
-                        return SmoothPageIndicator(
-                          controller: value.pageController,
-                          count: 3,
-                          effect: const WormEffect(
-                            activeDotColor: Color(0xFFC53030),
-                          ),
-                        );
-                      },
+                  builder: (BuildContext context, OnboardingController value, Widget? child) {
+                    return SmoothPageIndicator(
+                      controller: value.pageController,
+                      count: 3,
+                      effect: const WormEffect(activeDotColor: Color(0xFFC53030)),
+                    );
+                  },
                 ),
 
                 const SizedBox(height: 112),
 
                 Consumer<OnboardingController>(
-                  builder:
-                      (
-                        BuildContext context,
-                        OnboardingController value,
-                        Widget? child,
-                      ) {
-                        return ElevatedButton(
-                          onPressed: () {
-                            if (!value.isLastPage) {
-                              controller.pageController.nextPage(
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.easeInOut,
-                              );
-                            } else {
-                              _onFinish(context);
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            fixedSize: Size(
-                              MediaQuery.of(context).size.width,
-                              52,
-                            ),
-                          ),
-                          child: Text(
-                            value.isLastPage ? 'Get Started' : 'Next',
-                          ),
-                        );
+                  builder: (BuildContext context, OnboardingController value, Widget? child) {
+                    return ElevatedButton(
+                      onPressed: () {
+                        if (!value.isLastPage) {
+                          controller.pageController.nextPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                          );
+                        } else {
+                          _onFinish(context);
+                        }
                       },
+                      style: ElevatedButton.styleFrom(fixedSize: Size(MediaQuery.of(context).size.width, 52)),
+                      child: Text(value.isLastPage ? 'Get Started' : 'Next'),
+                    );
+                  },
                 ),
               ],
             ),
