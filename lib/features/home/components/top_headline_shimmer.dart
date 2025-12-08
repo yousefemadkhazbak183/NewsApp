@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news_app/core/constants/app_sizes.dart';
 import 'package:shimmer/shimmer.dart';
 
 class TopHeadlineShimmer extends StatelessWidget {
@@ -10,11 +11,11 @@ class TopHeadlineShimmer extends StatelessWidget {
       itemCount: 10,
       itemBuilder: (BuildContext context, int index) {
         return Padding(
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.all(AppSizes.pw16),
           child: Shimmer.fromColors(
             baseColor: Colors.grey,
             highlightColor: Colors.grey.shade100,
-            child: Container(height: 80, color: Colors.white),
+            child: Container(height: AppSizes.h80, color: Colors.white),
           ),
         );
       },

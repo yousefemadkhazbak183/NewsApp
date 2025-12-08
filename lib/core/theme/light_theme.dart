@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/core/colors/app_color.dart';
+import 'package:flutter_news_app/core/constants/app_sizes.dart';
 
 ThemeData lightTheme = ThemeData(
   useMaterial3: true,
@@ -13,6 +14,10 @@ ThemeData lightTheme = ThemeData(
     backgroundColor: Color(0xFFFFFFFF),
     titleTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColor.secondColor),
   ),
+  textTheme: TextTheme(
+    titleSmall: TextStyle(),
+    titleLarge: (TextStyle(color: const Color(0xFF363636), fontSize: AppSizes.sp16)),
+  ),
   progressIndicatorTheme: const ProgressIndicatorThemeData(color: AppColor.secondColor),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
@@ -20,6 +25,7 @@ ThemeData lightTheme = ThemeData(
       foregroundColor: const Color(0xFFFFFCFC),
       textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
       shape: const RoundedRectangleBorder(),
+      minimumSize: Size.fromHeight(AppSizes.h52),
     ),
   ),
 
