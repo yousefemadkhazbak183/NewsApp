@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/core/colors/app_color.dart';
+import 'package:flutter_news_app/core/constants/app_sizes.dart';
 
 class ViewAllComponent extends StatelessWidget {
   const ViewAllComponent({super.key, required this.title, this.titleColor, required this.onTap});
@@ -11,13 +12,17 @@ class ViewAllComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.w16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             title,
-            style: TextStyle(color: titleColor ?? AppColor.whiteColor, fontSize: 16, fontWeight: FontWeight.w700),
+            style: TextStyle(
+              color: titleColor ?? AppColor.whiteColor,
+              fontSize: AppSizes.sp16,
+              fontWeight: FontWeight.w700,
+            ),
           ),
           InkWell(
             // ignore: avoid_dynamic_calls
@@ -28,7 +33,7 @@ class ViewAllComponent extends StatelessWidget {
                 color: titleColor ?? AppColor.whiteColor,
                 decoration: TextDecoration.underline,
                 decorationColor: titleColor ?? AppColor.whiteColor,
-                fontSize: 14,
+                fontSize: AppSizes.sp14,
                 fontWeight: FontWeight.w400,
               ),
             ),

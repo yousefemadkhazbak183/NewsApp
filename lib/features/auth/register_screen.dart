@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/core/colors/app_color.dart';
+import 'package:flutter_news_app/core/constants/app_sizes.dart';
 import 'package:flutter_news_app/core/data/local_data/shared_preferences.dart';
 import 'package:flutter_news_app/core/widgets/custom_text_form_field.dart';
 import 'package:flutter_news_app/features/home/home_screen.dart';
@@ -48,7 +49,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         context,
         MaterialPageRoute(
           builder: (BuildContext context) {
-            return HomeScreen();
+            return const HomeScreen();
           },
         ),
       );
@@ -65,17 +66,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
           image: DecorationImage(image: AssetImage('assets/images/back_ground.png'), fit: BoxFit.fill),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(AppSizes.pw16),
           child: Form(
             key: _formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(child: Image.asset("assets/images/logo.png", height: 45)),
-                const SizedBox(height: 40),
-                const Text('Welcome to Newts', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
-                const SizedBox(height: 24),
+                Center(child: Image.asset("assets/images/logo.png", height: AppSizes.h45)),
+                SizedBox(height: AppSizes.h40),
+                Text(
+                  'Welcome to Newts',
+                  style: TextStyle(fontSize: AppSizes.sp20, fontWeight: FontWeight.w700),
+                ),
+                SizedBox(height: AppSizes.h24),
 
                 CustomTextFormField(
                   hintText: 'usama@gmail.com',
@@ -94,7 +98,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   },
                 ),
 
-                const SizedBox(height: 24),
+                SizedBox(height: AppSizes.h24),
                 CustomTextFormField(
                   hintText: '*********',
                   controller: passwordController,
@@ -108,7 +112,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     }
                   },
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: AppSizes.h24),
                 CustomTextFormField(
                   hintText: '*********',
                   controller: confirmPasswordController,
@@ -124,14 +128,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 if (errorMessage != null)
                   Padding(
-                    padding: const EdgeInsetsGeometry.symmetric(vertical: 8),
+                    padding: EdgeInsetsGeometry.symmetric(vertical: AppSizes.h8),
                     child: Text(errorMessage!, style: const TextStyle(color: AppColor.primaryColor)),
                   ),
 
-                const SizedBox(height: 24),
+                SizedBox(height: AppSizes.h24),
                 SizedBox(
                   width: double.infinity,
-                  height: 48,
+                  height: AppSizes.h48,
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState?.validate() ?? false) {
@@ -141,17 +145,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: isLoading ? const CircularProgressIndicator() : const Text('Sign Up'),
                   ),
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: AppSizes.h24),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Have an account?", style: TextStyle(fontSize: 14)),
-                    const SizedBox(width: 8),
+                    Text("Have an account?", style: TextStyle(fontSize: AppSizes.sp14)),
+                    SizedBox(width: AppSizes.w8),
                     GestureDetector(
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Text('Sign In', style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 14)),
+                      child: Text(
+                        'Sign In',
+                        style: TextStyle(color: Theme.of(context).primaryColor, fontSize: AppSizes.sp14),
+                      ),
                     ),
                   ],
                 ),

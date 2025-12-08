@@ -1,10 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/core/enum/request_status_enum.dart';
-import 'package:flutter_news_app/core/extension/date_time.dart';
-import 'package:flutter_news_app/core/widgets/custom_cached_network_image.dart';
-import 'package:flutter_news_app/core/widgets/custom_svg.dart';
 import 'package:flutter_news_app/features/home/components/news_item.dart';
 import 'package:flutter_news_app/features/home/components/top_headline_shimmer.dart';
 import 'package:flutter_news_app/features/home/controller/home_controller.dart';

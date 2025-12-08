@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_news_app/core/constants/app_sizes.dart';
 import 'package:flutter_news_app/core/extension/date_time.dart';
 import 'package:flutter_news_app/core/widgets/custom_cached_network_image.dart';
 import 'package:flutter_news_app/core/widgets/custom_svg.dart';
@@ -12,15 +13,15 @@ class NewsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: AppSizes.pw16, vertical: AppSizes.ph8),
       child: Row(
         children: [
           ClipRRect(
-            borderRadius: BorderRadiusGeometry.circular(8),
+            borderRadius: BorderRadiusGeometry.circular(AppSizes.r8),
             child: CustomCachedNetworkImage(imageUrl: model.urlToImage ?? ""),
           ),
 
-          const SizedBox(width: 8),
+          SizedBox(width: AppSizes.pw8),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -28,26 +29,34 @@ class NewsItem extends StatelessWidget {
               children: [
                 Text(
                   model.title ?? "",
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                  style: TextStyle(fontSize: AppSizes.sp16, fontWeight: FontWeight.w400),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
                 Row(
                   children: [
                     if (model.urlToImage != null)
-                      CircleAvatar(backgroundImage: NetworkImage(model.urlToImage ?? ""), radius: 10),
-                    const SizedBox(width: 6),
+                      CircleAvatar(backgroundImage: NetworkImage(model.urlToImage ?? ""), radius: AppSizes.r10),
+                    SizedBox(width: AppSizes.pw6),
                     Expanded(
                       child: Text(
                         (model.author ?? "").substring(0, min(model.author!.length, 10)),
-                        style: const TextStyle(color: Color(0xFF141414), fontWeight: FontWeight.w400, fontSize: 12),
+                        style: TextStyle(
+                          color: const Color(0xFF141414),
+                          fontWeight: FontWeight.w400,
+                          fontSize: AppSizes.sp12,
+                        ),
                       ),
                     ),
-                    const SizedBox(width: 8),
+                    SizedBox(width: AppSizes.pw8),
                     Expanded(
                       child: Text(
                         (model.publishedAt.formatDateTime()),
-                        style: const TextStyle(color: Color(0xFF141414), fontWeight: FontWeight.w400, fontSize: 12),
+                        style: TextStyle(
+                          color: const Color(0xFF141414),
+                          fontWeight: FontWeight.w400,
+                          fontSize: AppSizes.sp12,
+                        ),
                       ),
                     ),
                     const CustomSvgPicture.withoutFilterColor(path: "assets/images/bookmarks.svg"),

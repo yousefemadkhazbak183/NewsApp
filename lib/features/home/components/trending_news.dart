@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/core/colors/app_color.dart';
+import 'package:flutter_news_app/core/constants/app_sizes.dart';
 import 'package:flutter_news_app/core/enum/request_status_enum.dart';
 import 'package:flutter_news_app/core/extension/date_time.dart';
 import 'package:flutter_news_app/core/widgets/custom_cached_network_image.dart';
@@ -15,11 +16,11 @@ class TrendingNews extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: SizedBox(
-        height: 340,
+        height: AppSizes.h340,
         child: Stack(
           children: [
             SizedBox(
-              height: 240,
+              height: AppSizes.h240,
               width: double.infinity,
               child: Image.asset("assets/images/background.png", fit: BoxFit.fill),
             ),
@@ -27,15 +28,19 @@ class TrendingNews extends StatelessWidget {
               top: 70,
               child: Column(
                 children: [
-                  const Text(
+                  Text(
                     "NEWST",
-                    style: TextStyle(color: AppColor.primaryColor, fontSize: 40, fontWeight: FontWeight.w600),
+                    style: TextStyle(
+                      color: AppColor.primaryColor,
+                      fontSize: AppSizes.sp40,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                  const SizedBox(height: 6),
+                  SizedBox(height: AppSizes.h6),
                   ViewAllComponent(title: "Trending News", onTap: () {}),
-                  const SizedBox(height: 12),
+                  SizedBox(height: AppSizes.h12),
                   SizedBox(
-                    height: 140,
+                    height: AppSizes.h140,
                     child: Consumer<HomeController>(
                       builder: (BuildContext context, HomeController controller, Widget? child) {
                         switch (controller.everythingStatus) {
@@ -45,23 +50,23 @@ class TrendingNews extends StatelessWidget {
                             return Center(child: Text(controller.errorMessage!));
                           case RequestStatusEnum.loaded:
                             return ListView.separated(
-                              padding: const EdgeInsets.only(left: 16),
-                              separatorBuilder: (BuildContext context, int index) => const SizedBox(width: 12),
+                              padding: EdgeInsets.only(left: AppSizes.w16),
+                              separatorBuilder: (BuildContext context, int index) => SizedBox(width: AppSizes.w12),
                               itemCount: controller.newsEverythingList.take(3).length,
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (BuildContext context, int index) {
                                 final model = controller.newsEverythingList[index];
                                 return SizedBox(
-                                  width: 240,
+                                  width: AppSizes.w240,
                                   child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(12),
+                                    borderRadius: BorderRadius.circular(AppSizes.r12),
                                     child: Stack(
                                       children: [
                                         if (model.urlToImage != null)
                                           CustomCachedNetworkImage(
                                             imageUrl: model.urlToImage!,
-                                            height: 140,
-                                            width: 240,
+                                            height: AppSizes.h140,
+                                            width: AppSizes.w240,
                                           ),
 
                                         Positioned.fill(
@@ -79,22 +84,22 @@ class TrendingNews extends StatelessWidget {
                                           ),
                                         ),
                                         Positioned(
-                                          left: 12,
-                                          bottom: 12,
-                                          right: 12,
+                                          left: AppSizes.w12,
+                                          bottom: AppSizes.h12,
+                                          right: AppSizes.w12,
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 model.title!,
-                                                style: const TextStyle(
+                                                style: TextStyle(
                                                   color: Color(0xFFFFFCFC),
                                                   fontWeight: FontWeight.w700,
-                                                  fontSize: 16,
+                                                  fontSize: AppSizes.sp16,
                                                 ),
                                                 maxLines: 2,
                                               ),
-                                              const SizedBox(height: 6),
+                                              SizedBox(height: AppSizes.h6),
                                               Row(
                                                 children: [
                                                   Expanded(
@@ -102,24 +107,24 @@ class TrendingNews extends StatelessWidget {
                                                       children: [
                                                         CircleAvatar(
                                                           backgroundImage: NetworkImage(model.urlToImage.toString()),
-                                                          radius: 10,
+                                                          radius: AppSizes.r10,
                                                         ),
-                                                        const SizedBox(width: 6),
+                                                        SizedBox(width: AppSizes.pw6),
                                                         Expanded(
                                                           child: Text(
                                                             model.author ?? "لا يوجد ",
-                                                            style: const TextStyle(
+                                                            style: TextStyle(
                                                               color: Color(0xFFFFFCFC),
                                                               fontWeight: FontWeight.w400,
-                                                              fontSize: 12,
+                                                              fontSize: AppSizes.sp12,
                                                             ),
                                                           ),
                                                         ),
 
                                                         Text(
                                                           model.publishedAt.formatDateTime(),
-                                                          style: const TextStyle(
-                                                            fontSize: 12,
+                                                          style: TextStyle(
+                                                            fontSize: AppSizes.sp12,
                                                             fontWeight: FontWeight.w400,
                                                             color: Color(0xFFFFFCFC),
                                                           ),
