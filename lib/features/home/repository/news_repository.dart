@@ -3,11 +3,9 @@ import 'package:flutter_news_app/core/data/remote_data/api_service.dart';
 import 'package:flutter_news_app/features/home/models/article_news_model.dart';
 
 class NewsRepository {
-  ApiService apiService = ApiService();
-
   //
   Future<List<ArticleNewsModel>> getTopHeadlines({String? selectedCategory = "general"}) async {
-    final Map<String, dynamic> result = await apiService.get(
+    final Map<String, dynamic> result = await ApiService().get(
       ApiConfig.topHeadlines,
       query: {"country": "us", "category": selectedCategory},
     );
@@ -16,7 +14,7 @@ class NewsRepository {
   }
 
   Future<List<ArticleNewsModel>> getEverything() async {
-    final Map<String, dynamic> result = await apiService.get(
+    final Map<String, dynamic> result = await ApiService().get(
       ApiConfig.everything,
       query: {"q": "egypt", 'language': 'en'},
     );

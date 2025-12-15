@@ -3,14 +3,12 @@ import 'package:flutter_news_app/core/enum/request_status_enum.dart';
 import 'package:flutter_news_app/features/home/models/article_news_model.dart';
 import 'package:flutter_news_app/features/home/repository/news_repository.dart';
 
-NewsRepository newsRepository = NewsRepository();
-
 class HomeController extends ChangeNotifier {
   List<ArticleNewsModel> newsTopHeadLineList = [];
   List<ArticleNewsModel> newsEverythingList = [];
   String? errorMessage;
   String? selectedCategory;
-
+  NewsRepository newsRepository = NewsRepository();
   RequestStatusEnum everythingStatus = RequestStatusEnum.loading;
   RequestStatusEnum topHeadLineStatus = RequestStatusEnum.loading;
 
