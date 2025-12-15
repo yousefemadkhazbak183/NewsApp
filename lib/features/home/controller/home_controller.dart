@@ -8,11 +8,11 @@ class HomeController extends ChangeNotifier {
   List<ArticleNewsModel> newsEverythingList = [];
   String? errorMessage;
   String? selectedCategory;
-  NewsRepository newsRepository = NewsRepository();
+  NewsRepository newsRepository;
   RequestStatusEnum everythingStatus = RequestStatusEnum.loading;
   RequestStatusEnum topHeadLineStatus = RequestStatusEnum.loading;
 
-  HomeController() {
+  HomeController(this.newsRepository) {
     getEverything();
     getTopHeadLines();
   }
