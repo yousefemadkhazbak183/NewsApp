@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/core/enum/request_status_enum.dart';
+import 'package:flutter_news_app/core/mixins/notify_mixin.dart';
 import 'package:flutter_news_app/features/home/models/article_news_model.dart';
 import 'package:flutter_news_app/features/home/repository/news_repository.dart';
 
-class HomeController extends ChangeNotifier {
+class HomeController extends ChangeNotifier with NotifyMixin {
   List<ArticleNewsModel> newsTopHeadLineList = [];
   List<ArticleNewsModel> newsEverythingList = [];
   String? errorMessage;
@@ -19,7 +20,7 @@ class HomeController extends ChangeNotifier {
   Future<void> getTopHeadLines({String? category}) async {
     try {
       topHeadLineStatus = RequestStatusEnum.loading;
-      notifyListeners();
+      safeNotify();
       newsTopHeadLineList = await newsRepository.getTopHeadlines(selectedCategory: selectedCategory);
 
       topHeadLineStatus = RequestStatusEnum.loaded;
@@ -28,7 +29,7 @@ class HomeController extends ChangeNotifier {
       errorMessage = e.toString();
       topHeadLineStatus = RequestStatusEnum.error;
     }
-    notifyListeners();
+    safeNotify();
   }
 
   Future<void> getEverything() async {
@@ -40,12 +41,12 @@ class HomeController extends ChangeNotifier {
       errorMessage = e.toString();
       everythingStatus = RequestStatusEnum.error;
     }
-    notifyListeners();
+    safeNotify();
   }
 
   void updateSelectedCategory(String category) {
     selectedCategory = category;
     getTopHeadLines(category: selectedCategory);
-    notifyListeners();
+    safeNotify();
   }
 }
