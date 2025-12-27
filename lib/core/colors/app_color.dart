@@ -6,4 +6,5 @@ class AppColor {
   static const Color backGroundBottomColor = Color(0xffF6F7F9);
   static const Color secondColor = Color(0xff141414);
   static const Color whiteColor = Color(0xFFFFFCFC);
+  static const Color iconColor = Color(0xffA0A0A0);
 }

@@ -10,7 +10,6 @@ class ApiService {
   ApiService._();
   Future<dynamic> get(String endPoint, {Map<String, dynamic>? query}) async {
     final url = Uri.http(ApiConfig.baseUrl, 'v2/$endPoint', {"apiKey": ApiConfig.apiKey, ...?query});
-
     try {
       final http.Response response = await http.get(url);
 
