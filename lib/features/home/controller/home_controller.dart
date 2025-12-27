@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_news_app/core/enum/request_status_enum.dart';
 import 'package:flutter_news_app/core/mixins/notify_mixin.dart';
 import 'package:flutter_news_app/features/home/models/article_news_model.dart';
-import 'package:flutter_news_app/features/home/repository/news_repository.dart';
+import 'package:flutter_news_app/core/repository/news_repository.dart';
 
 class HomeController extends ChangeNotifier with NotifyMixin {
   List<ArticleNewsModel> newsTopHeadLineList = [];
