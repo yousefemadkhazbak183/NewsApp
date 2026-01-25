@@ -1,123 +1,111 @@
 # NewsApp 📱
 
 ## Overview
-NewsApp is an advanced Flutter application designed to provide users with a seamless and modern news reading experience. The app delivers comprehensive news content from multiple sources with an elegant and user-friendly interface.
+NewsApp is a modern, feature-rich Flutter application designed to deliver a seamless news reading experience. It aggregates news from various sources, offering users a personalized and interactive interface.  Built with a clean architecture and responsive design, it ensures a smooth experience across different devices.
 
 ## Key Features
 
 ### 🔥 Current Features
-- **Modern UI**: Elegant and responsive Material Design
-- **News Browsing**: Display news in organized list format
-- **Multiple Categories**: Sports, politics, technology, and economic news
-- **Article Details**: Full content display for each news article
-- **Optimized Performance**: Fast response and efficient loading
+- **Authentication System**: Secure Login and Registration screens.
+- **Onboarding Experience**: Interactive introduction to the app's features.
+- **News Browsing**: browse news by categories (Sports, Politics, etc.).
+- **Advanced Search**: Search for articles by keywords using a dedicated search controller.
+- **Profile Management**: User profile customization.
+- **Modern UI**: Polished Material Design with responsive layout using `flutter_screenutil`.
+- **Cached Images**: Optimized image loading for offline capabilities.
+- **Top News & Headlines**: Stay updated with the latest stories.
 
 ### 🚀 Features in Development
-- **Advanced Search**: Search news by keywords
-- **Favorites**: Save favorite articles for later reading
-- **Notifications**: Breaking news alerts
-- **Dark Reading Mode**: Comfortable reading experience in low light
-- **Social Sharing**: Share news across social media platforms
+- **Bookmarks / Favorites**: Save articles for later reading (Structure in place).
+- **Dark Mode**: Toggle between light and dark themes.
+- **Push Notifications**: Real-time alerts for breaking news.
+- **Social Sharing**: Share articles directly to social media.
 
 ## Technologies Used
 
-### 🛠 Framework & Tools
-- **Flutter**: Primary development framework
-- **Dart**: Programming language
-- **HTTP**: Communication with news APIs
-- **Provider/Bloc**: State Management
-- **Cached Network Image**: Image loading optimization
+### 🛠 Framework & Libraries
+- **Flutter & Dart**: Core development framework.
+- **Provider**: State management.
+- **Shared Preferences**: Local data persistence.
+- **HTTP**: API communication.
+- **Cached Network Image**: Efficient image caching.
+- **Flutter ScreenUtil**: Screen adaptation and responsiveness.
+- **Shimmer**: Loading effects.
+- **Flutter SVG**: Vector asset rendering.
 
-### 🔗 External Sources
-- **News API**: Fetching news from multiple sources
-- **REST APIs**: Integration with various news services
+### 🏗 Architecture
+The project follows a **Feature-First / Clean Architecture** approach, ensuring scalability and maintainability.
 
-## App Structure
-
-### 📱 Main Screens
-1. **Home Screen**: Display top news and headlines
-2. **Categories Screen**: Browse news by category
-3. **News Details Screen**: Read full article content
-4. **Search Screen**: Search through news
-5. **Favorites Screen**: Saved news articles
-
-### 🏗 Technical Architecture
 ```
 lib/
-├── models/          # Data models
-├── services/        # API and network services
-├── screens/         # Application screens
-├── widgets/         # Reusable components
-├── utils/           # Helper utilities
-└── providers/       # State management
+├── core/                # Core layers accessible across the app
+│   ├── constants/       # App constants
+│   ├── data/            # Data sources (Local/Remote)
+│   ├── theme/           # App customization and themes
+│   ├── utils/           # Helper functions
+│   └── widgets/         # Shared UI components
+│
+├── features/            # Feature-specific code
+│   ├── auth/            # Login & Register logic
+│   ├── home/            # Main news feed
+│   ├── onboarding/      # App introduction
+│   ├── search/          # Search functionality
+│   ├── profile/         # User profile
+│   └── bookmark/        # Saved articles
+│
+└── main.dart            # Application entry point
 ```
+
+## Getting Started
+
+### Prerequisites
+- Flutter SDK (3.0 or newer)
+- Dart SDK (2.17 or newer)
+- Android Studio / VS Code
+
+### Installation
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/flutter_news_app.git
+   ```
+2. **Navigate to the project directory**
+   ```bash
+   cd flutter_news_app
+   ```
+3. **Install dependencies**
+   ```bash
+   flutter pub get
+   ```
+4. **Run the app**
+   ```bash
+   flutter run
+   ```
 
 ## Development Roadmap
 
-### Phase One ✅ (Partially Complete)
-- [x] Setup basic project structure
-- [x] Design main interface
-- [x] Basic news API integration
-- [ ] Complete news details screen
+### Phase One ✅ (Completed)
+- [x] Project Setup & Architecture
+- [x] Authentication (Login/Register)
+- [x] Onboarding Flow
+- [x] Home & Categories
+- [x] Profile Screen
 
-### Phase Two 🔄 (In Development)
-- [ ] Add search functionality
-- [ ] Implement favorites system
-- [ ] Improve user experience
-- [ ] Performance and stability testing
+### Phase Two 🔄 (In Progress)
+- [x] Search Functionality
+- [ ] Bookmarks/Favorites System (UI scaffolding done)
+- [ ] Unit & Widget Testing
 
 ### Phase Three 📋 (Planned)
-- [ ] Add push notifications
-- [ ] Implement dark mode
-- [ ] Social sharing features
-- [ ] Advanced performance optimizations
+- [ ] Dark Mode Implementation
+- [ ] Push Notifications
+- [ ] Multi-language Support (Localization)
 
-## Technical Challenges
-
-### Solved Issues ✅
-- Improved data loading speed
-- Responsive design for all screen sizes
-- Efficient state management
-
-### Current Challenges 🔍
-- Memory management optimization for images
-- Local storage system implementation
-- Fast browsing experience improvements
-
-## System Requirements
-
-### Technical Environment
-- **Flutter**: Version 3.0 or newer
-- **Dart SDK**: Version 2.17 or newer
-- **Android**: API Level 21+ (Android 5.0+)
-- **iOS**: iOS 11.0+
-
-### Required Tools
-- Android Studio or VS Code
-- Flutter SDK installed and configured
-- Emulator or physical device for testing
-
-## How to Contribute
-
-This project is open for continuous development and improvement. Contributions can be made through:
-- Adding new features
-- Performance improvements
-- Bug fixes
-- Documentation improvements
-
-## Future Vision
-
-The goal is to make this app a comprehensive news platform featuring:
-- **Simplicity**: Easy and intuitive interface
-- **Speed**: Instant content loading
-- **Comprehensiveness**: Diverse news coverage
-- **Modernity**: Using latest technologies
+## Author
+**Yousef Emad Khazbak**  
+Flutter Developer
 
 ---
+> **Note**: This project is actively maintained. Feel free to contribute by submitting a PR or opening an issue.
 
-> **Note**: This project is in active development. Updates and improvements are made continuously to provide the best possible user experience.
 
-**Developer**: Yousef Emad Khazbak
-**Language**: Dart/Flutter
-**License**: TBD
-**Last Updated**: September 2024
+

@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/core/constants/app_sizes.dart';
 import 'package:flutter_news_app/core/data/local_data/shared_preferences.dart';
+import 'package:flutter_news_app/core/svg/svg_image.dart';
+import 'package:flutter_news_app/core/theme/light_theme.dart';
+import 'package:flutter_news_app/features/auth/login_screen.dart';
 import 'package:flutter_news_app/features/profile/profile_controller.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -55,23 +58,25 @@ class ProfileScreen extends StatelessWidget {
                       style: TextStyle(fontSize: AppSizes.sp16, color: Colors.black),
                     ),
                     SizedBox(height: AppSizes.h16),
-                    const ListTile(title: Text("Person"), contentPadding: EdgeInsets.zero, leading: Icon(Icons.person)),
-                    const ListTile(
-                      title: Text("Language"),
-                      contentPadding: EdgeInsets.zero,
-                      leading: Icon(Icons.language),
+
+                    _buildProfileItem("Personal Info", "assets/images/person.svg", () {}),
+                    _buildProfileItem("Language", "assets/images/language.svg", () {}),
+                    _buildProfileItem("Country", "assets/images/Leading element.svg", () {}),
+                    _buildProfileItem("Terms & Conditions", "assets/images/terms.svg", () {}),
+                    _buildProfileItem(
+                      "Logout",
+                      "assets/images/logout.svg",
+                      () async {
+                        await PreferencesManager().clear();
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => const LoginScreen()),
+                          (route) => false,
+                        );
+                      },
+                      corlor: lightTheme.primaryColor,
+                      withDivider: false,
                     ),
-                    const ListTile(
-                      title: Text("Country"),
-                      contentPadding: EdgeInsets.zero,
-                      leading: Icon(Icons.location_on),
-                    ),
-                    const ListTile(
-                      title: Text("Terms & Conditions"),
-                      contentPadding: EdgeInsets.zero,
-                      leading: Icon(Icons.info),
-                    ),
-                    const ListTile(title: Text("Logout"), contentPadding: EdgeInsets.zero, leading: Icon(Icons.logout)),
                   ],
                 );
               },
@@ -122,6 +127,30 @@ class ProfileScreen extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+
+  Widget _buildProfileItem(
+    String title,
+    String iconPath,
+    Function onTap, {
+    Color corlor = const Color(0xFF161F1B),
+    bool withDivider = true,
+  }) {
+    return Column(
+      children: [
+        ListTile(
+          onTap: () => onTap(),
+          title: Text(
+            title,
+            style: TextStyle(fontSize: AppSizes.sp16, fontWeight: FontWeight.w400, color: Colors.black),
+          ),
+          contentPadding: EdgeInsets.symmetric(horizontal: AppSizes.pw16),
+          leading: SvgImage(assetPath: iconPath),
+          trailing: const SvgImage(assetPath: "assets/images/row.svg"),
+        ),
+        if (withDivider) Divider(color: Colors.grey.shade500),
+      ],
     );
   }
 }
