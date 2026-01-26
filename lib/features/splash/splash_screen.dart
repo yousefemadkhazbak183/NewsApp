@@ -21,7 +21,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void _navigationAfterLogged() async {
     await Future.delayed(const Duration(seconds: 2));
 
-    final bool onBoardingComplete = PreferencesManager().getBool('onBoarding_complete') ?? false;
+    final bool onBoardingComplete =
+        PreferencesManager().getBool('onBoarding_complete') ?? false;
     final bool isLoggedIn = PreferencesManager().getBool('is_logged') ?? false;
     if (!mounted) return;
     if (!onBoardingComplete) {
@@ -57,7 +58,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Image.asset('assets/images/splash_screen_app.png', fit: BoxFit.fill, width: double.infinity),
+      body: Image.asset(
+        'assets/images/splash_screen_app.png',
+        fit: BoxFit.fill,
+        width: double.infinity,
+      ),
     );
   }
 }
