@@ -13,6 +13,8 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  TextEditingController userNameController = TextEditingController();
+
   TextEditingController emailController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
@@ -31,7 +33,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     await Future.delayed(const Duration(seconds: 2));
 
     final savedEmail = PreferencesManager().getString("user_email");
-    PreferencesManager().getString("user_password");
 
     if (savedEmail != null && savedEmail == emailController.text.trim()) {
       setState(() {
@@ -39,6 +40,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         isLoading = false;
       });
     } else {
+      await PreferencesManager().setString("user_name", userNameController.text);
       await PreferencesManager().setString("user_email", emailController.text);
       await PreferencesManager().setString("user_password", passwordController.text);
       await PreferencesManager().setBool("is_logged", true);
@@ -69,100 +71,115 @@ class _RegisterScreenState extends State<RegisterScreen> {
           padding: EdgeInsets.all(AppSizes.pw16),
           child: Form(
             key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(child: Image.asset("assets/images/logo.png", height: AppSizes.h45)),
-                SizedBox(height: AppSizes.h40),
-                Text(
-                  'Welcome to Newts',
-                  style: TextStyle(fontSize: AppSizes.sp20, fontWeight: FontWeight.w700),
-                ),
-                SizedBox(height: AppSizes.h24),
-
-                CustomTextFormField(
-                  hintText: 'usama@gmail.com',
-                  controller: emailController,
-                  title: 'Email',
-                  validator: (value) {
-                    final emailRegExp = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your email';
-                    }
-                    if (!emailRegExp.hasMatch(value)) {
-                      return 'Please enter a valid email address';
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-
-                SizedBox(height: AppSizes.h24),
-                CustomTextFormField(
-                  hintText: '*********',
-                  controller: passwordController,
-                  title: 'Password',
-                  obscureText: true,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your password';
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                SizedBox(height: AppSizes.h24),
-                CustomTextFormField(
-                  hintText: '*********',
-                  controller: confirmPasswordController,
-                  title: 'Password',
-                  obscureText: true,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your password';
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                if (errorMessage != null)
-                  Padding(
-                    padding: EdgeInsetsGeometry.symmetric(vertical: AppSizes.h8),
-                    child: Text(errorMessage!, style: const TextStyle(color: AppColor.primaryColor)),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(child: Image.asset("assets/images/logo.png", height: AppSizes.h45)),
+                  SizedBox(height: AppSizes.h40),
+                  Text(
+                    'Welcome to Newts',
+                    style: TextStyle(fontSize: AppSizes.sp20, fontWeight: FontWeight.w700),
                   ),
+                  SizedBox(height: AppSizes.h24),
 
-                SizedBox(height: AppSizes.h24),
-                SizedBox(
-                  width: double.infinity,
-                  height: AppSizes.h48,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState?.validate() ?? false) {
-                        register();
+                  CustomTextFormField(
+                    hintText: 'Youssef Emad',
+                    controller: userNameController,
+                    title: 'User Name',
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your User Name';
+                      } else {
+                        return null;
                       }
                     },
-                    child: isLoading ? const CircularProgressIndicator() : const Text('Sign Up'),
                   ),
-                ),
-                SizedBox(height: AppSizes.h24),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Have an account?", style: TextStyle(fontSize: AppSizes.sp14)),
-                    SizedBox(width: AppSizes.w8),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text(
-                        'Sign In',
-                        style: TextStyle(color: Theme.of(context).primaryColor, fontSize: AppSizes.sp14),
-                      ),
+
+                  CustomTextFormField(
+                    hintText: 'usama@gmail.com',
+                    controller: emailController,
+                    title: 'Email',
+                    validator: (value) {
+                      final emailRegExp = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your email';
+                      }
+                      if (!emailRegExp.hasMatch(value)) {
+                        return 'Please enter a valid email address';
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+
+                  SizedBox(height: AppSizes.h24),
+                  CustomTextFormField(
+                    hintText: '*********',
+                    controller: passwordController,
+                    title: 'Password',
+                    obscureText: true,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your password';
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  SizedBox(height: AppSizes.h24),
+                  CustomTextFormField(
+                    hintText: '*********',
+                    controller: confirmPasswordController,
+                    title: 'Password',
+                    obscureText: true,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your password';
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  if (errorMessage != null)
+                    Padding(
+                      padding: EdgeInsetsGeometry.symmetric(vertical: AppSizes.h8),
+                      child: Text(errorMessage!, style: const TextStyle(color: AppColor.primaryColor)),
                     ),
-                  ],
-                ),
-              ],
+
+                  SizedBox(height: AppSizes.h24),
+                  SizedBox(
+                    width: double.infinity,
+                    height: AppSizes.h48,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState?.validate() ?? false) {
+                          register();
+                        }
+                      },
+                      child: isLoading ? const CircularProgressIndicator() : const Text('Sign Up'),
+                    ),
+                  ),
+                  SizedBox(height: AppSizes.h24),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Have an account?", style: TextStyle(fontSize: AppSizes.sp14)),
+                      SizedBox(width: AppSizes.w8),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          'Sign In',
+                          style: TextStyle(color: Theme.of(context).primaryColor, fontSize: AppSizes.sp14),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_news_app/core/colors/app_color.dart';
 import 'package:flutter_news_app/core/constants/app_sizes.dart';
 import 'package:flutter_news_app/core/repository/news_repository.dart';
-import 'package:flutter_news_app/features/home/components/news_item.dart';
 import 'package:flutter_news_app/features/search/search_controller.dart';
 import 'package:provider/provider.dart';
 
