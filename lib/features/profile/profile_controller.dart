@@ -16,9 +16,9 @@ class ProfileController extends ChangeNotifier with NotifyMixin {
   }
 
   void getUserData() {
-    userName = PreferencesManager().getString("user_name") ?? "";
-    countryName = PreferencesManager().getString("country_name") ?? "";
-    countryCode = PreferencesManager().getString("country_code") ?? "";
+    userName = PreferencesManager().getString("user_name");
+    countryName = PreferencesManager().getString("country_name");
+    countryCode = PreferencesManager().getString("country_code");
 
     safeNotify();
   }
