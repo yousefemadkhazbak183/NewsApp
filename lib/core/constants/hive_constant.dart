@@ -1,0 +1,4 @@
+class HiveConstant {
+  static const String userBox = 'user_box';
+  static const String currentUser = "current_user";
+}
