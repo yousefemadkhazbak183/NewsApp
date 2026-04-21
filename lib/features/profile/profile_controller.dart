@@ -1,7 +1,8 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_news_app/core/data/local_data/shared_preferences.dart';
+import 'package:flutter_news_app/core/data/user_repository.dart';
 import 'package:flutter_news_app/core/mixins/notify_mixin.dart';
+import 'package:flutter_news_app/core/model/user_model.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfileController extends ChangeNotifier with NotifyMixin {
@@ -16,16 +17,19 @@ class ProfileController extends ChangeNotifier with NotifyMixin {
   }
 
   void getUserData() {
-    userName = PreferencesManager().getString("user_name");
-    countryName = PreferencesManager().getString("country_name");
-    countryCode = PreferencesManager().getString("country_code");
+    final UserModel? user = UserRepository().getUser();
+    userName = user?.name ?? "";
+    countryName = user?.countryName;
+    countryCode = user?.countryCode;
 
     safeNotify();
   }
 
-  void saveCountry(Country selectedCountry) {
-    PreferencesManager().setString("country_name", selectedCountry.name);
-    PreferencesManager().setString("country_code", selectedCountry.countryCode);
+  Future<void> saveCountry(Country selectedCountry) async {
+    await UserRepository().updateUser(
+      countryName: selectedCountry.name,
+      countryCode: selectedCountry.countryCode,
+    );
 
     countryName = selectedCountry.name;
     countryCode = selectedCountry.countryCode;

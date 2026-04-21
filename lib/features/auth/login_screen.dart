@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_news_app/core/colors/app_color.dart';
 import 'package:flutter_news_app/core/constants/app_sizes.dart';
 import 'package:flutter_news_app/core/data/local_data/shared_preferences.dart';
+import 'package:flutter_news_app/core/data/user_repository.dart';
 import 'package:flutter_news_app/core/widgets/custom_text_form_field.dart';
 import 'package:flutter_news_app/features/auth/register_screen.dart';
 import 'package:flutter_news_app/features/navigation/navigation_screen.dart';
@@ -16,7 +17,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
 
-  TextEditingController passwordEmail = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String? errorMessage;
@@ -29,20 +30,14 @@ class _LoginScreenState extends State<LoginScreen> {
     });
     await Future.delayed(const Duration(seconds: 2));
 
-    final getEmail = PreferencesManager().getString("user_email");
-    final getPassword = PreferencesManager().getString("user_password");
+    final String? error = UserRepository().login(
+      emailController.text,
+      passwordController.text,
+    );
 
-    if (getEmail == null || getPassword == null) {
+    if (error != null) {
       setState(() {
-        errorMessage = "Not Found Account";
-        isLoading = false;
-      });
-      return;
-    }
-
-    if (getEmail != emailController.text.trim() && getPassword != passwordEmail.text.trim()) {
-      setState(() {
-        errorMessage = "Not Found Account";
+        errorMessage = error;
         isLoading = false;
       });
       return;
@@ -71,7 +66,10 @@ class _LoginScreenState extends State<LoginScreen> {
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
-          image: DecorationImage(image: AssetImage('assets/images/back_ground.png'), fit: BoxFit.fill),
+          image: DecorationImage(
+            image: AssetImage('assets/images/back_ground.png'),
+            fit: BoxFit.fill,
+          ),
         ),
         child: Padding(
           padding: EdgeInsets.all(AppSizes.pw16),
@@ -81,7 +79,9 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(child: Image.asset("assets/images/logo.png", height: AppSizes.h45)),
+                Center(
+                  child: Image.asset("assets/images/logo.png", height: AppSizes.h45),
+                ),
                 SizedBox(height: AppSizes.h40),
                 Text(
                   'Welcome to Newts',
@@ -94,7 +94,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: emailController,
                   title: 'Email',
                   validator: (value) {
-                    final emailRegExp = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+                    final emailRegExp = RegExp(
+                      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+                    );
                     if (value == null || value.isEmpty) {
                       return 'Please enter your email';
                     }
@@ -109,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: AppSizes.h24),
                 CustomTextFormField(
                   hintText: '*********',
-                  controller: passwordEmail,
+                  controller: passwordController,
                   title: 'Password',
                   obscureText: true,
                   validator: (value) {
@@ -120,7 +122,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     }
                   },
                 ),
-                if (errorMessage != null) Text(errorMessage!, style: const TextStyle(color: AppColor.primaryColor)),
+                if (errorMessage != null)
+                  Text(
+                    errorMessage!,
+                    style: const TextStyle(color: AppColor.primaryColor),
+                  ),
                 SizedBox(height: AppSizes.h24),
 
                 SizedBox(
@@ -132,14 +138,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         login();
                       }
                     },
-                    child: isLoading ? const CircularProgressIndicator() : const Text('Sign In'),
+                    child: isLoading
+                        ? const CircularProgressIndicator()
+                        : const Text('Sign In'),
                   ),
                 ),
                 SizedBox(height: AppSizes.h24),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Don't have account?", style: TextStyle(fontSize: AppSizes.sp14)),
+                    Text(
+                      "Don't have account?",
+                      style: TextStyle(fontSize: AppSizes.sp14),
+                    ),
                     SizedBox(width: AppSizes.w8),
                     GestureDetector(
                       onTap: () {
@@ -154,7 +165,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       child: Text(
                         'Sign Up',
-                        style: TextStyle(color: Theme.of(context).primaryColor, fontSize: AppSizes.sp14),
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: AppSizes.sp14,
+                        ),
                       ),
                     ),
                   ],
